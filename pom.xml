@@ -7,9 +7,9 @@
     <artifactId>webexinteract-api-client</artifactId>
     <version>0.1-SNAPSHOT</version>
 
-    <name>Wordpress API Client</name>
-    <description>WordPress REST API Java Client Wrapper. Providing simple access to the features of the WordPress API.</description>
-    <url>https://github.com/christwinn/wordpress-api-client-java</url>
+    <name>WebExInteract API Client</name>
+    <description>WebExInteract REST API Java Client Wrapper. Providing simple access to the features of the WebExInteract API.</description>
+    <url>https://github.com/christwinn/webexinteract</url>
 
     <properties>
         <java.version>8</java.version>
@@ -22,11 +22,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
