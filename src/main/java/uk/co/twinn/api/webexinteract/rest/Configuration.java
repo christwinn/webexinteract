@@ -112,12 +112,12 @@ public class Configuration {
         return api;
     }
 
-    public static String getKey() {
+    /*public static String getKey() {
         if (key == null){
             fromFile();
         }
         return key;
-    }
+    }*/
     public static String getSecret() {
         if (secret == null){
             fromFile();
