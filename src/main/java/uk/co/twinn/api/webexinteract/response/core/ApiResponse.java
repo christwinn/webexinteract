@@ -1,0 +1,86 @@
+/*
+ * Copyright (c) 2025.
+ *
+ * Crud+ ActionBuilder
+ * Author: Chris Twinn
+ * Licence: MIT Licence see LICENCE file
+ * All Rights Reserved
+ */
+package uk.co.twinn.api.webexinteract.response.core;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.ws.rs.core.UriBuilderException;
+import uk.co.twinn.api.webexinteract.core.JacksonObjectMapper;
+
+import java.io.IOException;
+
+public class ApiResponse <T> {
+
+    private final JacksonObjectMapper json = new JacksonObjectMapper();
+
+    protected boolean success;
+    protected ErrorMessage error = null;
+
+    public ApiResponse(){}
+
+    public ApiResponse(ApiResponseResult<T> result){
+
+        if (!result.getSuccess()){
+
+            //html no access to resource? apache disallowed PUT DELETE, outside our scope but return the result to the user
+            switch (result.getStatusCode()){
+                case 0:
+                case 400: case 401: case 402: case 403: case 404: //not going to be json
+                case 500: case 502: case 503: case 504: //not going to be json
+                    error = new ErrorMessage(result.getMessage());
+                    break;
+                default:
+                    try{
+                        error = json.getObjectMapper().readValue(result.getMessage(), new TypeReference<ErrorMessage>(){});
+                    }catch(UriBuilderException | IOException | IllegalArgumentException e){
+                        error = new ErrorMessage(e.toString());
+                    }
+            }
+
+        }else{
+
+            success = true;
+
+        }
+
+    }
+
+    /**
+     * @return the success
+     */
+    public boolean isSuccess() {
+        return success;
+    }
+
+    /**
+     * @param success the success to set
+     */
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public boolean hasError(){
+        return error != null;
+    }
+
+    public ErrorMessage getError() {
+        return error;
+    }
+
+    public void setError(ErrorMessage error) {
+        this.error = error;
+    }
+
+    @JsonIgnore
+    public ObjectMapper getObjectMapper(){
+        return json.getObjectMapper();
+    }
+
+}

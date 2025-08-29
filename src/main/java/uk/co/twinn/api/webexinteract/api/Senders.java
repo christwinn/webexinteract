@@ -1,0 +1,20 @@
+package uk.co.twinn.api.webexinteract.api;
+
+import uk.co.twinn.api.webexinteract.builders.AccountBuilder;
+import uk.co.twinn.api.webexinteract.builders.SenderBuilder;
+
+public class Senders {
+
+    public static SenderBuilder.Reader read(String senderId){
+
+        return new SenderBuilder.Reader(senderId);
+
+    }
+
+    public static SenderBuilder.ListAll<?> list(){
+
+        return new SenderBuilder.ListAll<>();
+
+    }
+
+}
