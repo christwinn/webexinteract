@@ -1,10 +1,12 @@
+/*
+ * Copyright (c)  2025
+ * Author: Chris Twinn
+ * Refer to LICENCE file
+ */
+
 package uk.co.twinn.api.webexinteract.api;
 
 import uk.co.twinn.api.webexinteract.builders.AccountBuilder;
-import uk.co.twinn.api.webexinteract.builders.SmsBuilder;
-import uk.co.twinn.api.webexinteract.models.sms.Recipient;
-
-import java.util.List;
 
 public class Accounts {
 

@@ -1,3 +1,9 @@
+/*
+ * Copyright (c)  2025
+ * Author: Chris Twinn
+ * Refer to LICENCE file
+ */
+
 package uk.co.twinn.api.webexinteract.builders;
 
 import com.fasterxml.jackson.core.type.TypeReference;

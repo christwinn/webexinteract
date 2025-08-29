@@ -1,12 +1,14 @@
+/*
+ * Copyright (c)  2025
+ * Author: Chris Twinn
+ * Refer to LICENCE file
+ */
+
 package uk.co.twinn.api.webexinteract.builders;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import uk.co.twinn.api.webexinteract.response.Created;
-import uk.co.twinn.api.webexinteract.response.Ran;
-import uk.co.twinn.api.webexinteract.response.Updated;
 import uk.co.twinn.api.webexinteract.rest.Rest;
-
-import java.util.List;
 
 public class CoreCreator<S, T> {
 

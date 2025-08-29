@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2025.
- *
- * Crud+ ActionBuilder
+ * Copyright (c)  2025
  * Author: Chris Twinn
- * Licence: MIT Licence see LICENCE file
- * All Rights Reserved
+ * Refer to LICENCE file
  */
+
 package uk.co.twinn.api.webexinteract.builders;
 
 import java.math.BigDecimal;

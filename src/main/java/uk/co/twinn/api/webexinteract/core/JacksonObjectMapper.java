@@ -1,3 +1,9 @@
+/*
+ * Copyright (c)  2025
+ * Author: Chris Twinn
+ * Refer to LICENCE file
+ */
+
 package uk.co.twinn.api.webexinteract.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
