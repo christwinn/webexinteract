@@ -24,7 +24,7 @@ public class SenderBuilder {
 
     }
 
-    public static class ListAll<T extends ListAll<T>> extends CoreSeek.Searcher<Sender, T> {
+    public static class ListAll<T extends ListAll<T>> extends CoreSeek.SearchCore<Sender, T> {
 
         /**
          * @param pageNumber Defaults to 1 page if not given.<br>

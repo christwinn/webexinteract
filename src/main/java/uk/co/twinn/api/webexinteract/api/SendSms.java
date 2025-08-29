@@ -7,15 +7,17 @@ import java.util.List;
 
 public class SendSms {
 
-    public static SmsBuilder.Creator<?> create(String messageBody, String templateId, String from, List<Recipient> to){
+    protected SendSms(){}
 
-        return new SmsBuilder.Creator<>(messageBody, templateId, from, to);
+    public static SmsBuilder.Creator<?> send(String messageBody, String from, List<Recipient> to){
+
+        return new SmsBuilder.Creator<>(messageBody, from, to);
 
     }
 
-    public static SmsBuilder.Creator<?> send(String messageBody, String templateId, String from){
+    public static SmsBuilder.Creator<?> send(String messageBody, String from){
 
-        return new SmsBuilder.Creator<>(messageBody, templateId, from);
+        return new SmsBuilder.Creator<>(messageBody, from);
 
     }
 

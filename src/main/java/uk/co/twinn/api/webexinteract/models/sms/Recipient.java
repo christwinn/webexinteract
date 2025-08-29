@@ -2,6 +2,7 @@ package uk.co.twinn.api.webexinteract.models.sms;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +14,27 @@ public class Recipient {
     private HashMap<String, String> mergeFields;
 
     public Recipient(){}
+
+    public Recipient correlationId(String correlationId){
+        this.correlationId = correlationId;
+        return this;
+    }
+    public Recipient countryCode(String countryCode){
+        this.countryCode = countryCode;
+        return this;
+    }
+    /*Each call to phone adds a new number that the message wil be sent to*/
+    public Recipient phone(String e164phoneNumber){
+        if (this.phone == null){
+            this.phone = new ArrayList<>();
+        }
+        this.phone.add(e164phoneNumber);
+        return this;
+    }
+    public Recipient mergeFields(HashMap<String, String> mergeFields) {
+        this.mergeFields = mergeFields;
+        return this;
+    }
 
     @JsonProperty("correlation_id")
     public String getCorrelationId() {

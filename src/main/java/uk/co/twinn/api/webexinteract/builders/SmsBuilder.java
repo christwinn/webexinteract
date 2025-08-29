@@ -73,14 +73,14 @@ public class SmsBuilder extends ApiRequest {
         public Creator(){
             this.to = new ArrayList<>();
         }
-        public Creator(String messageBody, String templateId, String from){
+        public Creator(String messageBody, String from){
             this();
             this.messageBody = messageBody;
             this.templateId = templateId;
             this.from = from;
         }
-        public Creator(String messageBody, String templateId, String from, List<Recipient> to){
-            this(messageBody, templateId, from);
+        public Creator(String messageBody, String from, List<Recipient> to){
+            this(messageBody, from);
             this.to.addAll(to);
         }
 
@@ -148,17 +148,23 @@ public class SmsBuilder extends ApiRequest {
 
         public Created<Sms> getResponse(){
 
+
             if (to == null || to.isEmpty()) {
                 return getFailure("Recipients(To) are mandatory");
-            }else if (messageBody == null || messageBody.isEmpty()){
-                return getFailure("No Message to Send");
-            }else if (templateId == null || templateId.isEmpty()){
-                return getFailure("Template Id is mandatory");
-            }else if (from == null || from.isEmpty()){
+            } else if (from == null || from.isEmpty()) {
                 return getFailure("Sender(from) is mandatory");
-            }else{
+            }else if (messageBody == null && templateId == null){
+                return getFailure("Template OR MessageBody is required");
+            }else if (messageBody != null && templateId != null){
+                return getFailure("Note: Only one of messageBody or templateId should be present in the request.");
+            }else if (templateId != null && templateId.isEmpty()){
+                return getFailure("Template is required");
+            }else if (messageBody != null && messageBody.isEmpty()){
+                return getFailure("MessageBody is required");
+            } else {
                 SmsBuilder create = build();
-                return super.getCreate(create.endPoint(), create.toJson(), new TypeReference<Sms>() {});
+                return super.getCreate(create.endPoint(), create.toJson(), new TypeReference<Sms>() {
+                });
             }
 
         }
