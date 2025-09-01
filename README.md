@@ -34,7 +34,7 @@ Set contents as below. Change the secret.
 
 ## Account
 ```java
-private static void accounts() {
+private void accounts() {
 
     Read<Account> read = Accounts.read().getResponse();
 
@@ -57,7 +57,7 @@ private static void accounts() {
 ```
 ## Send SMS
 ```java
-private static void sendSms(String phoneNumber){
+private void sendSms(String phoneNumber){
 
     //you can add a list of recipients or a single recipient
     //you can also add a list of phoneNumbers under the Recipient
@@ -112,7 +112,7 @@ private static void sendSms(String phoneNumber){
 ## Senders
 ### List
 ```java
-private static void sendersList() {
+private void sendersList() {
 
     Listed<Sender> listed = Senders.list().getResponse();
 
@@ -163,7 +163,7 @@ private static void sendersList() {
 
 ### Delete 
 ```java 
-private static void senderDelete() {
+private void senderDelete() {
 
     Deleted<Sender> delete = Senders.delete("ssd_3XXXXXXXXXXXXXXXXXXXXX").getResponse();
 
