@@ -19,6 +19,15 @@ Note: We use a 4 point versioning system: (Semantic Versioning 2.0.0 + 1) W.X.Y.
     X: MAJOR version when we make incompatible API changes  
     Y: MINOR version when we add functionality in a backward compatible manner  
     Z: PATCH version when we make backward compatible bug fixes  
+    
+## Installation
+```xml
+<dependency>
+    <groupId>uk.co.twinn.api</groupId>
+    <artifactId>webexinteract-api-client</artifactId>
+    <version>1.1.0.0</version>
+</dependency>
+```
 
 ## Authentication
 
