@@ -43,7 +43,7 @@ public class Configuration {
      * </p><hr><p>
      * If the Configuration is never called it is the same as new Configuration() below.<br>
      * </p><p>
-     * <i>-rely upon a file being in the userhome under ~/.wordpress-api/config.json</i><br>
+     * <i>-rely upon a file being in the userhome under ~/.webexinteract-api/config.json</i><br>
      * new Configuration();
      * </p><p>
      * <i>-set the values by literal strings</i><br>
@@ -168,11 +168,11 @@ public class Configuration {
         Configuration.method = method;
     }
 
-    /* We will look in ~/.wordpress-api/config.json */
+    /* We will look in ~/.webexinteract-api/config.json */
     private static void fromFile(){
         fromFile(System.getProperty("user.home")  + DEFAULT_LOCATION);
     }
-    /* We will look in ~/.wordpress-api/config.json */
+    /* We will look in ~/.webexinteract-api/config.json */
     private static void fromFile(String pathToConfigDOTjson){
 
         File f = new File(pathToConfigDOTjson);

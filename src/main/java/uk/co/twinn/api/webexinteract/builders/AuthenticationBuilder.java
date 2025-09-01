@@ -6,7 +6,6 @@
 
 package uk.co.twinn.api.webexinteract.builders;
 
-import uk.co.twinn.api.webexinteract.response.core.ApiResponseResult;
 import uk.co.twinn.api.webexinteract.rest.Configuration;
 
 public class AuthenticationBuilder {

@@ -2,7 +2,7 @@
 Use WebExInteract to send bulk SMS online. 
 Instantly reach out to your customers with personalized SMS marketing messages, updates, alerts, OTPs, SMS attachments &amp; more.
 
-The Upstream API is still in it's infancy and so subsequently is this API! :disappointed:
+The Upstream [API](https://docs.webexinteract.com/reference/sms-api) is still in it's infancy and so subsequently is this API! :disappointed:
 
 What we and upstream can do however is:
 
@@ -10,6 +10,7 @@ What we and upstream can do however is:
     Accounts.read()
     Senders.read()
     Senders.list()
+    Senders.delete()
 
 Enjoy :smiley:
 
@@ -18,6 +19,18 @@ Note: We use a 4 point versioning system: (Semantic Versioning 2.0.0 + 1) W.X.Y.
     X: MAJOR version when we make incompatible API changes  
     Y: MINOR version when we add functionality in a backward compatible manner  
     Z: PATCH version when we make backward compatible bug fixes  
+
+## Authentication
+
+Create a file in user home ~ named /.webexinteract-api/config.json
+Set contents as below. Change the secret.
+
+```json
+{
+  "website" : "api.webexinteract.com", 
+  "secret": "abc_1234567890abcdef1234567890abcdef"
+}
+```
 
 ## Account
 ```java
