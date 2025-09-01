@@ -9,7 +9,6 @@ package uk.co.twinn.api.webexinteract.api;
 import uk.co.twinn.api.webexinteract.builders.AccountBuilder;
 
 public class Accounts {
-
     protected Accounts() {}
 
     public static AccountBuilder.Reader read(){
