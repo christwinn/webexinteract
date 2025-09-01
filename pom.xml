@@ -5,7 +5,7 @@
 
     <groupId>uk.co.twinn.api</groupId>
     <artifactId>webexinteract-api-client</artifactId>
-    <version>0.1</version>
+    <version>1.1.0.0</version>
 
     <name>WebExInteract API Client</name>
     <description>WebExInteract REST API Java Client Wrapper. Providing simple access to the features of the WebExInteract API.</description>

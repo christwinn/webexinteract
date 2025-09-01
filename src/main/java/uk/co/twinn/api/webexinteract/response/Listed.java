@@ -10,13 +10,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import uk.co.twinn.api.webexinteract.models.Listing;
 import uk.co.twinn.api.webexinteract.response.core.ApiResponse;
 import uk.co.twinn.api.webexinteract.response.core.ApiResponseResult;
-import uk.co.twinn.api.webexinteract.response.core.ErrorMessage;
+import uk.co.twinn.api.webexinteract.response.error.ErrorResponse;
 
 public class Listed<T> extends ApiResponse<Listing<T>> {
 
     protected Listing<T> listed;
 
-    public Listed(ApiResponseResult<Listing<T>>  result){
+    public Listed(ApiResponseResult<Listing<T>> result){
 
         super(result);
 
@@ -28,22 +28,16 @@ public class Listed<T> extends ApiResponse<Listing<T>> {
                     break;
                 default:
                     success = false;
-                    error = new ErrorMessage("Invalid response code");
+                    if (result.getErrorResponse() != null) {
+                        error = result.getErrorResponse();
+                    }else {
+                        error = new ErrorResponse("Invalid response code:" + result.getStatusCode());
+                    }
                     break;
             }
         }
 
     }
-
-    /*private void setList(ApiResponseResult<List<T>> result){
-        try {
-            this.listed = result.getData();
-        }catch (Exception e){
-            Logger.getLogger(Listed.class.getName())
-                .log(Level.SEVERE, "Failed to parse list", e);
-            this.error = new ErrorMessage("Parse list failure");
-        }
-    }*/
 
     public boolean isSuccess() {
         return super.success && listed != null;

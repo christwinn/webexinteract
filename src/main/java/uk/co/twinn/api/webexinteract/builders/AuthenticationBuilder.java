@@ -6,7 +6,6 @@
 
 package uk.co.twinn.api.webexinteract.builders;
 
-import uk.co.twinn.api.webexinteract.response.Message;
 import uk.co.twinn.api.webexinteract.response.core.ApiResponseResult;
 import uk.co.twinn.api.webexinteract.rest.Configuration;
 
@@ -31,20 +30,14 @@ public class AuthenticationBuilder {
          *  Stores the provided details for later use by the system
          *  This only needs to be done once in our application
          */
-        public Message getResponse(){
+        public String getResponse(){
 
             new Configuration.Builder()
                 .website(website)
                 .secret(secret)
                 .build();
 
-            return new Message(
-                new ApiResponseResult<>(
-                    true,
-                    200,
-                    "{\"message\": \"The Authentication Configuration has been updated with the provided values.\"}"
-                )
-            );
+            return "Current Configuration has been updated.";
 
         }
 

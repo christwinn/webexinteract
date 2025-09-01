@@ -249,7 +249,7 @@ public class Rest<T> {
 
             CompletableFuture<ApiResponseResult<T>> future =
                 CompletableFuture.supplyAsync(() ->
-                    http.delete(endPoint, getHeaders(), type)
+                    http.delete(getUri(endPoint), getHeaders(), type)
                 );
 
             return future.get();

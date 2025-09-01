@@ -16,19 +16,20 @@ import uk.co.twinn.api.webexinteract.response.Created;
 import uk.co.twinn.api.webexinteract.response.core.ApiResponseResult;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import static uk.co.twinn.api.webexinteract.defines.EndPoints.SMS;
 
-public class SmsBuilder extends ApiRequest {
+public class SendSmsBuilder extends ApiRequest {
 
     protected final SmsSend smsSend = new SmsSend();
 
-    public SmsBuilder(){}
+    public SendSmsBuilder(){}
 
-    private SmsBuilder(Creator<?> creator){
+    private SendSmsBuilder(Creator<?> creator){
 
         smsSend.setMessageBody(creator.messageBody);
         smsSend.setTemplateId(creator.templateId);
@@ -69,8 +70,8 @@ public class SmsBuilder extends ApiRequest {
         private String from;
         private List<Recipient> to;
 
-        private LocalDateTime scheduleAt;
-        private LocalDateTime validUntil;
+        private ZonedDateTime scheduleAt;
+        private ZonedDateTime validUntil;
 
         private Boolean skipOptOutCheck;
 
@@ -112,12 +113,12 @@ public class SmsBuilder extends ApiRequest {
             return self();
         }
 
-        public T setScheduleAt(LocalDateTime scheduleAt){
+        public T setScheduleAt(ZonedDateTime scheduleAt){
             this.scheduleAt = scheduleAt;
             return self();
         }
 
-        public T setValidUntil(LocalDateTime validUntil){
+        public T setValidUntil(ZonedDateTime validUntil){
             this.validUntil = validUntil;
             return self();
         }
@@ -140,7 +141,7 @@ public class SmsBuilder extends ApiRequest {
             return self();
         }
 
-        protected SmsBuilder build(){ return new SmsBuilder(this);}
+        protected SendSmsBuilder build(){ return new SendSmsBuilder(this);}
 
         private Created<Sms> getFailure(String reason){
             return new Created<>(
@@ -168,7 +169,7 @@ public class SmsBuilder extends ApiRequest {
             }else if (messageBody != null && messageBody.isEmpty()){
                 return getFailure("MessageBody is required");
             } else {
-                SmsBuilder create = build();
+                SendSmsBuilder create = build();
                 return super.getCreate(create.endPoint(), create.toJson(), new TypeReference<Sms>() {
                 });
             }

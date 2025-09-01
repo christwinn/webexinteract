@@ -16,6 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import uk.co.twinn.api.webexinteract.core.JacksonObjectMapper;
 import uk.co.twinn.api.webexinteract.response.core.ApiResponseResult;
+import uk.co.twinn.api.webexinteract.response.error.ErrorResponse;
 import uk.co.twinn.api.webexinteract.rest.Configuration;
 
 import java.io.IOException;
@@ -49,6 +50,24 @@ public class Http<T> {
 
     }
 
+    private ApiResponseResult<T> parseError(String content, int statusCode) {
+        try {
+            return new ApiResponseResult<>(
+                    true,
+                    statusCode,
+                    (ErrorResponse)json.getObjectMapper().readValue(content, new TypeReference<ErrorResponse>() {})
+            );
+        }catch(IOException e){
+            Logger.getLogger(Http.class.getName()).log(
+                    Level.SEVERE,
+                    "ParseErrorFailure",
+                    e
+            );
+            return new ApiResponseResult<>(false, 0, e.toString());
+        }
+
+    }
+
     private ApiResponseResult<T> parseResponse(CloseableHttpResponse response, TypeReference<?> type){
 
         try {
@@ -68,6 +87,10 @@ public class Http<T> {
                     }else {
                         return parseResponse(EntityUtils.toString(response.getEntity()), sl.getStatusCode(), type);
                     }
+                case 204: //sender delete, no content
+                    return new ApiResponseResult<>(true, sl.getStatusCode());
+                case 400: case 404: //:-) and so if we mess up the uri and it is a 404 we could get a pickle but delete sender returns 404 if sender not found
+                    return parseError(EntityUtils.toString(response.getEntity()), sl.getStatusCode());
                 default:
                     if (Configuration.isDebug()){
                         String r = EntityUtils.toString(response.getEntity());

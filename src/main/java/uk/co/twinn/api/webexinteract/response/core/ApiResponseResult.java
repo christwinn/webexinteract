@@ -6,17 +6,34 @@
 
 package uk.co.twinn.api.webexinteract.response.core;
 
+import uk.co.twinn.api.webexinteract.response.error.Error;
+import uk.co.twinn.api.webexinteract.response.error.ErrorResponse;
+
+import java.util.Collections;
+
 public class ApiResponseResult<T>{
+
+    /* Intermediary result parsed onto object or list dependant upon higher up the chain */
 
     private boolean success;
     private int     status;
-    private String  message = "";
-
+    private ErrorResponse errorResponse;
     private T data;
+
+    public ApiResponseResult(boolean success, int status){
+        this.success = success;
+        this.status = status;
+    }
 
     public ApiResponseResult(boolean success, int status, String message){
         this.success = success;
-        this.message = message;
+        errorResponse = new ErrorResponse(message);
+        this.status = status;
+    }
+
+    public ApiResponseResult(boolean success, int status, ErrorResponse errorResponse){
+        this.success = success;
+        this.errorResponse = errorResponse;
         this.status = status;
     }
 
@@ -38,16 +55,12 @@ public class ApiResponseResult<T>{
         return status;
     }
 
-    public String getMessage() {
-        return message;
+    public ErrorResponse getErrorResponse(){
+        return errorResponse;
     }
 
     public T getData() {
         return data;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
 }

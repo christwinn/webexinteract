@@ -9,6 +9,7 @@ package uk.co.twinn.api.webexinteract.builders;
 import com.fasterxml.jackson.core.type.TypeReference;
 import uk.co.twinn.api.webexinteract.models.Listing;
 import uk.co.twinn.api.webexinteract.models.senders.Sender;
+import uk.co.twinn.api.webexinteract.response.Deleted;
 import uk.co.twinn.api.webexinteract.response.Listed;
 import uk.co.twinn.api.webexinteract.response.Read;
 
@@ -25,6 +26,18 @@ public class SenderBuilder {
         }
 
         public Read<Sender> getResponse(){
+            return super.getResponse(SENDERS, new TypeReference<Sender>() {});
+        }
+
+    }
+
+    public static class Deleter extends CoreDeleter.DeleterCoreStringKey<Sender>{
+
+        public Deleter(String senderId){
+            super(senderId);
+        }
+
+        public Deleted<Sender> getResponse(){
             return super.getResponse(SENDERS, new TypeReference<Sender>() {});
         }
 

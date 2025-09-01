@@ -9,6 +9,7 @@ package uk.co.twinn.api.webexinteract.models.sms;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class SmsSend {
     private String from;
     private List<Recipient> to;
 
-    private LocalDateTime scheduleAt;
-    private LocalDateTime validUntil;
+    private ZonedDateTime scheduleAt;
+    private ZonedDateTime validUntil;
 
     private Boolean skipOptOutCheck;
 
@@ -63,20 +64,20 @@ public class SmsSend {
     }
 
     @JsonProperty("schedule_at")
-    public LocalDateTime getScheduleAt() {
+    public ZonedDateTime getScheduleAt() {
         return scheduleAt;
     }
 
-    public void setScheduleAt(LocalDateTime scheduleAt) {
+    public void setScheduleAt(ZonedDateTime scheduleAt) {
         this.scheduleAt = scheduleAt;
     }
 
     @JsonProperty("valid_until")
-    public LocalDateTime getValidUntil() {
+    public ZonedDateTime getValidUntil() {
         return validUntil;
     }
 
-    public void setValidUntil(LocalDateTime validUntil) {
+    public void setValidUntil(ZonedDateTime validUntil) {
         this.validUntil = validUntil;
     }
 

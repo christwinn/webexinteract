@@ -6,7 +6,7 @@
 
 package uk.co.twinn.api.webexinteract.api;
 
-import uk.co.twinn.api.webexinteract.builders.SmsBuilder;
+import uk.co.twinn.api.webexinteract.builders.SendSmsBuilder;
 import uk.co.twinn.api.webexinteract.models.sms.Recipient;
 
 import java.util.List;
@@ -15,21 +15,21 @@ public class SendSms {
 
     protected SendSms(){}
 
-    public static SmsBuilder.Creator<?> send(String messageBody, String from, List<Recipient> to){
+    public static SendSmsBuilder.Creator<?> send(String messageBody, String from, List<Recipient> to){
 
-        return new SmsBuilder.Creator<>(messageBody, from, to);
-
-    }
-
-    public static SmsBuilder.Creator<?> send(String messageBody, String from){
-
-        return new SmsBuilder.Creator<>(messageBody, from);
+        return new SendSmsBuilder.Creator<>(messageBody, from, to);
 
     }
 
-    public static SmsBuilder.Creator<?> send(){
+    public static SendSmsBuilder.Creator<?> send(String messageBody, String from){
 
-        return new SmsBuilder.Creator<>();
+        return new SendSmsBuilder.Creator<>(messageBody, from);
+
+    }
+
+    public static SendSmsBuilder.Creator<?> send(){
+
+        return new SendSmsBuilder.Creator<>();
 
     }
 

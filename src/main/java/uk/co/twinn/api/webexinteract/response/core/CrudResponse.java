@@ -7,6 +7,7 @@
 package uk.co.twinn.api.webexinteract.response.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import uk.co.twinn.api.webexinteract.response.error.ErrorResponse;
 
 public class CrudResponse<T> extends ApiResponse<T>{
 
@@ -18,13 +19,17 @@ public class CrudResponse<T> extends ApiResponse<T>{
 
         if (result.getSuccess()){
             switch (result.getStatusCode()){
-                case 200: case 201:
+                case 200: case 201: case 204:
                     success = true;
                     this.object = result.getData();
                     break;
                 default:
                     success = false;
-                    error = new ErrorMessage("Invalid response code");
+                    if (result.getErrorResponse() != null){
+                        this.error = result.getErrorResponse();
+                    }else {
+                        error = new ErrorResponse("Invalid response code:" + result.getStatusCode());
+                    }
                     break;
             }
         }
@@ -33,7 +38,7 @@ public class CrudResponse<T> extends ApiResponse<T>{
 
     @Override
     public boolean isSuccess() {
-        return super.success && object != null;
+        return super.success; // && object != null;
     }
 
     public String toJson(){

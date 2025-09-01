@@ -7,7 +7,6 @@
 package uk.co.twinn.api.webexinteract.models.sms;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import uk.co.twinn.api.webexinteract.response.core.ErrorMessage;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class Sms {
     private String requestId;
     private List<SmsTransaction> messages;
 
-    private List<ErrorMessage> errors;
+    private List<SmsTransaction> errors;
 
     public Sms(){}
 
@@ -38,11 +37,12 @@ public class Sms {
         this.messages = messages;
     }
 
-    public List<ErrorMessage> getErrors() {
+    public List<SmsTransaction> getErrors() {
         return errors;
     }
 
-    public void setErrors(List<ErrorMessage> errors) {
+    public void setErrors(List<SmsTransaction> errors) {
         this.errors = errors;
     }
+
 }

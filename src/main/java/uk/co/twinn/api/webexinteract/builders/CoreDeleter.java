@@ -86,62 +86,28 @@ class CoreDeleter {
     static class DeleterCoreStringKey<T>{
 
         protected final String key;
-        protected final boolean force;
 
-        public DeleterCoreStringKey(String key, boolean force){
+        public DeleterCoreStringKey(String key){
             this.key = key;
-            this.force = force;
         }
 
         Deleted<T> getResponse(String endPoint, TypeReference<T> type){
-            return readResponse(endPoint + "/" + key + "?force=" + force, type);
+            return readResponse(endPoint + "/" + key, type);
         }
 
         private Deleted<T> readResponse(String endPoint, TypeReference<T> type){
-            if (key == null || key.isEmpty() || !force) {
+            if (key == null || key.isEmpty()) {
                 return new Deleted<>(
                     new ApiResponseResult<>(
                         false,
                         0,
-                        "Delete is limited to a single object result\n" +
-                            "Please set requested id AND set the Force!"
+                        "Please set required id!"
                     )
                 );
             }else{
                 return new Deleted<>(
                     new Rest<T>().delete(endPoint, type)
                 );
-            }
-
-        }
-
-    }
-
-    static class ChildDeleterCoreStringKey<T> extends DeleterCoreStringKey<T>{
-
-        private final String childKey;
-
-        public ChildDeleterCoreStringKey(String key, String childKey, boolean force){
-            super(key, force);
-            this.childKey = childKey;
-        }
-
-        Deleted<T> getResponse(String endPoint, String childEndPoint, TypeReference<T> type){
-            return readResponse(endPoint + "/" + key + "/" + childEndPoint + childKey + "?force=" + force, type);
-        }
-
-        private Deleted<T> readResponse(String endPoint, TypeReference<T> type){
-            if (childKey == null || childKey.isEmpty()) {
-                return new Deleted<>(
-                    new ApiResponseResult<>(
-                        false,
-                        0,
-                        "Delete is limited to a single object result\n" +
-                            "Please set requested [child]Id!"
-                    )
-                );
-            }else{
-                return super.getResponse(endPoint, type);
             }
 
         }

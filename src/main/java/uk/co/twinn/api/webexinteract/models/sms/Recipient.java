@@ -34,8 +34,13 @@ public class Recipient {
         if (this.phone == null){
             this.phone = new ArrayList<>();
         }
-        this.phone.add(e164phoneNumber);
+        this.phone.add(cleanNumber(e164phoneNumber));
         return this;
+    }
+
+    private String cleanNumber(String number){
+        //allow + 0123456789
+        return number.replaceAll("[^\\d+]", "");
     }
     public Recipient mergeFields(HashMap<String, String> mergeFields) {
         this.mergeFields = mergeFields;

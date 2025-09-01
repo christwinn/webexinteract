@@ -18,6 +18,12 @@ public class Senders {
 
     }
 
+    public static SenderBuilder.Deleter delete(String senderId){
+
+        return new SenderBuilder.Deleter(senderId);
+
+    }
+
     public static SenderBuilder.ListAll<?> list(){
 
         return new SenderBuilder.ListAll<>();

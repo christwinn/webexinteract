@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.core.UriBuilderException;
 import uk.co.twinn.api.webexinteract.core.JacksonObjectMapper;
+import uk.co.twinn.api.webexinteract.response.error.ErrorResponse;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ public class ApiResponse <T> {
     private final JacksonObjectMapper json = new JacksonObjectMapper();
 
     protected boolean success;
-    protected ErrorMessage error = null;
+    protected ErrorResponse error = null;
 
     public ApiResponse(){}
 
@@ -32,14 +33,8 @@ public class ApiResponse <T> {
                 case 0:
                 case 400: case 401: case 402: case 403: case 404: //not going to be json
                 case 500: case 502: case 503: case 504: //not going to be json
-                    error = new ErrorMessage(result.getMessage());
+                    error = result.getErrorResponse();
                     break;
-                default:
-                    try{
-                        error = json.getObjectMapper().readValue(result.getMessage(), new TypeReference<ErrorMessage>(){});
-                    }catch(UriBuilderException | IOException | IllegalArgumentException e){
-                        error = new ErrorMessage(e.toString());
-                    }
             }
 
         }else{
@@ -68,11 +63,11 @@ public class ApiResponse <T> {
         return error != null;
     }
 
-    public ErrorMessage getError() {
+    public ErrorResponse getError() {
         return error;
     }
 
-    public void setError(ErrorMessage error) {
+    public void setError(ErrorResponse error) {
         this.error = error;
     }
 

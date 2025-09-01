@@ -14,6 +14,7 @@ public class SmsTransaction {
     private String to;
     private String status;
     private Integer code;
+    private String message;
 
     public SmsTransaction(){}
 
@@ -49,5 +50,13 @@ public class SmsTransaction {
 
     public void setCode(Integer code) {
         this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
